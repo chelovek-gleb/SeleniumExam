@@ -4,8 +4,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
 import time
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
-from pages.main_page import MainPage
+
+"""Класс фильтров. Все фильтры по товарам хранятся здесь"""
 
 class FilterPage(Base):
 
@@ -16,12 +16,12 @@ class FilterPage(Base):
 
     # Locators
 
-    filter_price_from_locator = "(//input[@type='number'])[1]"
-    filter_price_to_locator = "(//input[@type='number'])[2]"
-    filter_tourist_locator = '//span[text()="туристические"]'
-    apply_button_locator = '//span[text()="Применить"]'
-    apply_button_cookies_locator = '//span[text()="Согласен"]'
-    raiting_locator = '//span[text()="Наш рейтинг:"]'
+    filter_price_from_locator = "(//input[@type='number'])[1]" # фильтр цена ОТ
+    filter_price_to_locator = "(//input[@type='number'])[2]" # фильтр цена ДО
+    filter_tourist_locator = '//span[text()="туристические"]' # фильтр туристические палатки
+    apply_button_locator = '//span[text()="Применить"]' # кнопка подтвердить фильтры
+    apply_button_cookies_locator = '//span[text()="Согласен"]' #подтвердить куки
+    raiting_locator = '//span[text()="Наш рейтинг:"]' #локатор нужен для того чтобы к нему навестись и нажать кнопку применить
     kol_vo_locator = '//span[text()="Количество мест"]' #локатор нужен для того чтобы к нему навестись и не перекрывать нужный чекбокс
 
      # Getters
@@ -48,7 +48,7 @@ class FilterPage(Base):
         return WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.kol_vo_locator)))
     
     # Actions
-
+    """методы заполнения цены и кликов по кнопкам"""
     def send_filter_price_from(self):
         self.get_filter_price_from().clear()
         self.get_filter_price_from().send_keys('15000')
@@ -72,15 +72,19 @@ class FilterPage(Base):
         print('Нажали принять кукис')
 
     # Methods
+    """Метод подтверждения куки"""
     def apply_cookies(self):
         self.click_apply_button_cookies()
         time.sleep(5)
 
+    """Метод фильтрации цены"""
     def filter_price(self):
         self.send_filter_price_from()
         self.send_filter_price_to()
         time.sleep(5)
 
+
+    """Метод фильтрации палаток по виду Туристические"""
     def filter_tourist_tent(self):
         print('Пытаемся нажать чекбокс Туристические')
         time.sleep(10)
@@ -90,6 +94,7 @@ class FilterPage(Base):
         self.click_filter_tourist()
         time.sleep(5)
 
+    """Метод подтверждения фильтра"""
     def apply_filter(self):
         print('Пытаемся подтвердить фильтры')
         self.actions.move_to_element(self.get_raiting()).perform()

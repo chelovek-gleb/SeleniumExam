@@ -11,12 +11,13 @@ from selenium.webdriver.chrome.options import Options
 """Тест"""
 
 def test_perehod_catalog():
-    
+    """Отключаем лишнее логирование, расширяем окно"""
     options = Options()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(options=options)
     driver.maximize_window()
 
+    """Объявление экземпляров класса"""
     main_page = MainPage(driver)
     outdoor_page = OutdoorPage(driver)
     filters = FilterPage(driver)
@@ -25,21 +26,21 @@ def test_perehod_catalog():
     base = Base(driver)
 
 
-    main_page.catalog()
-    outdoor_page.choose_tents()
+    main_page.catalog() #Переходим в каталог
+    outdoor_page.choose_tents() #Выбираем палатки и тенты
 
-    filters.apply_cookies()
-    filters.filter_price()
-    filters.filter_tourist_tent()
-    filters.apply_filter()
+    filters.apply_cookies() # Подтверждаем куки
+    filters.filter_price() # Фильтруем цены
+    filters.filter_tourist_tent() #Фильтруем палатки Туристические
+    filters.apply_filter() # Подтверждаем фильтры
     
-    discount_price = products_page.save_discount_price_product1()
-    name_product = products_page.save_name_product1() + ' (uni: one size)'
+    discount_price = products_page.save_discount_price_product1() # Сохранили цену по скидке
+    name_product = products_page.save_name_product1() + ' (uni: one size)' # Сохранили наименование товара + размер
 
-    products_page.add_to_cart_product1()
+    products_page.add_to_cart_product1() # Добавили в корзину товар
 
-    final_price = cart_page.save_final_price_product1()
-    final_name = cart_page.save_final_name() 
+    final_price = cart_page.save_final_price_product1() # Сохранили финальную цену из корзины
+    final_name = cart_page.save_final_name()  # Сохранили финальное наименование из сорзины
     
     assert discount_price == final_price, 'Цена не равна финальной цене!'
     print('Цены совпадают!')
