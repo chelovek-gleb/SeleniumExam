@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
+from utilities.logger import Logger
 import time
 from selenium.common.exceptions import TimeoutException
 
@@ -66,11 +67,13 @@ class MainPage(Base):
     # Methods
     def catalog(self):
         """Метод перехода с главной страницы в каталог и далее в раздел Туризм и кемпинг"""
+        Logger.add_start_step(method = 'catalog')
         self.driver.get(self.url)
         self.click_catalog()
         time.sleep(5)
         self.click_tourism_and_camping()
         time.sleep(5)
+        Logger.add_end_step(url = self.get_current_url, method='catalog')
     
 
   

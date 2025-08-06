@@ -1,0 +1,11 @@
+
+-----
+Test: tests/test_1.py::test_perehod_catalog (call)
+Start time: 2025-08-06 13:47:26.076357
+Start name method: catalog
+
+End time: 2025-08-06 13:48:15.715392
+End name method: catalog
+URL: <bound method Base.get_current_url of <pages.main_page.MainPage object at 0x000002B9F8E7AA50>>
+
+-----
