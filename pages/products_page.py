@@ -64,12 +64,12 @@ class ProductsPage(Base):
     # Methods
     """Метод добавления товара в корзину"""
     def add_to_cart_product1(self):
-        print('Пытаемся нажать кнопку добавить в корзину')
+        print('Нажимаем кнопку добавить в корзину')
         self.actions.move_to_element(self.get_product1()).perform() #Нужно навестись на товар чтобы появилась кнопка добавить в корзину
         time.sleep(3)
         self.click_add_to_cart_product1()
         time.sleep(3)
-        print('Пытаемся перейти в корзину из модалки')
+        print('Переходим в корзину из модалки')
         self.click_add_to_cart_choose_size()
         time.sleep(3)
         self.click_go_to_cart()

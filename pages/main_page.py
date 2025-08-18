@@ -33,7 +33,7 @@ class MainPage(Base):
         return WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.tourism_and_camping_locator)))
     
     def get_notice(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.notice_locator)))
+        return WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.notice_locator)))
     
     
     # Actions
