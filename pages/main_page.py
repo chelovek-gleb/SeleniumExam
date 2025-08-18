@@ -18,17 +18,22 @@ class MainPage(Base):
     tourism_and_camping_locator = '//a[@href="/catalog/outdoor/"]' # Туризм и кемпинг локатор
     notice_locator = '//div[@class="popmechanic-close"]' # локатор кнопки закрытия на уведомлении
 
+    burger_menu_locator = "//div[contains(@class, 'Header_burger')]"
+
 
     # Getters
 
     def get_catalog(self):
-        return WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.catalog_locator)))
+        return WebDriverWait(self.driver, 25).until(EC.element_to_be_clickable((By.XPATH, self.catalog_locator)))
     
     def get_tourism_and_camping(self):
-        return WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.tourism_and_camping_locator)))
+        return WebDriverWait(self.driver, 25).until(EC.element_to_be_clickable((By.XPATH, self.tourism_and_camping_locator)))
     
     def get_notice(self):
         return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.notice_locator)))
+    
+    def get_burger_menu(self):
+        return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.burger_menu_locator)))
     
     
     # Actions
@@ -37,6 +42,10 @@ class MainPage(Base):
         self.close_notice_if_present()
         self.get_catalog().click()
         print('Кликнули на каталог')
+
+    def click_burger_menu(self):
+        self.get_burger_menu().click()
+        print('Кликнули на бургер-меню')
 
     def click_tourism_and_camping(self):
         self.close_notice_if_present()
@@ -64,7 +73,14 @@ class MainPage(Base):
         """Метод перехода с главной страницы в каталог и далее в раздел Туризм и кемпинг"""
         Logger.add_start_step(method = 'catalog')
         self.driver.get(self.url)
-        self.click_catalog()
+        try:
+            self.click_catalog()
+            print('Каталог открыт напрямую')
+        except TimeoutException:
+            print('Каталог не найден напрямую, пробуем через бургер-меню')
+            self.click_burger_menu()
+            self.click_catalog()
+            print("Каталог открыт через бургер-меню")
         time.sleep(5)
         self.click_tourism_and_camping()
         time.sleep(5)
