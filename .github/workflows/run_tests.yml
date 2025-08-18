@@ -25,19 +25,18 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Chrome
+      - name: Install Chrome and xvfb
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y google-chrome-stable xvfb
 
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: test_name_and_price_in_cart
+      - name: Run single test
         if: github.event.inputs.deployment_target == 'test_name_and_price_in_cart'
-        run: pytest tests/test_name_and_price_in_cart.py -s -v
+        run: xvfb-run -s "-screen 0 2560x1440x24" pytest tests/test_name_and_price_in_cart.py -s -v
 
-      - name: run_all_tests
-        if: github.event.inputs.deployment_target == 'all_tests'
-        run: pytest -s -v
-
+      - name: Run all tests
+        if: github.event.inputs.deployment_target == 'run_all_tests'
+        run: xvfb-run -s "-screen 0 2560x1440x24" pytest -s -v
