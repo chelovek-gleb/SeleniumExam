@@ -12,11 +12,6 @@ class MainPage(Base):
     
     url = 'https://www.kant.ru/'
 
-    def __init__(self, driver):
-        super().__init__(driver)
-        self.driver = driver
-
-
     # Locators
 
     catalog_locator = '//a[@href="/catalog/"]' 
@@ -33,7 +28,7 @@ class MainPage(Base):
         return WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.tourism_and_camping_locator)))
     
     def get_notice(self):
-        return WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.notice_locator)))
+        return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.notice_locator)))
     
     
     # Actions
@@ -55,7 +50,7 @@ class MainPage(Base):
     def close_notice_if_present(self):
         """Метод закрытия уведомлений"""
         try:
-            notice = WebDriverWait(self.driver, 45).until(EC.element_to_be_clickable((By.XPATH, self.notice_locator)))
+            notice = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.notice_locator)))
             notice.click()
             print("Уведомление закрыто")
         except TimeoutException:

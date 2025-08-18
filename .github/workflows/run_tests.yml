@@ -1,0 +1,43 @@
+name: Automated tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      deployment_target:
+        description: Choose target
+        required: true
+        default: test_name_and_price_in_cart
+        type: choice
+        options:
+          - test_name_and_price_in_cart
+          - run_all_tests
+
+jobs:
+  test: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: test_name_and_price_in_cart
+        if: github.event.inputs.deployment_target == 'test_name_and_price_in_cart'
+        run: pytest tests/test_name_and_price_in_cart.py -s -v
+
+      - name: run_all_tests
+        if: github.event.inputs.deployment_target == 'all_tests'
+        run: pytest -s -v
+

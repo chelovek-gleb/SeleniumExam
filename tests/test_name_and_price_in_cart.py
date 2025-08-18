@@ -1,4 +1,3 @@
-from selenium import webdriver
 import time
 from pages.main_page import MainPage
 from pages.outdoor_page import OutdoorPage
@@ -10,20 +9,15 @@ from selenium.webdriver.chrome.options import Options
 
 """Тест"""
 
-def test_perehod_catalog():
-    """Отключаем лишнее логирование, расширяем окно"""
-    options = Options()
-    options.add_experimental_option('excludeSwitches', ['enable-logging'])
-    driver = webdriver.Chrome(options=options)
-    driver.maximize_window()
-
+def test_perehod_catalog(browser):
+   
     """Объявление экземпляров класса"""
-    main_page = MainPage(driver)
-    outdoor_page = OutdoorPage(driver)
-    filters = FilterPage(driver)
-    products_page = ProductsPage(driver)
-    cart_page = CartPage(driver)
-    base = Base(driver)
+    main_page = MainPage(browser)
+    outdoor_page = OutdoorPage(browser)
+    filters = FilterPage(browser)
+    products_page = ProductsPage(browser)
+    cart_page = CartPage(browser)
+    base = Base(browser)
 
 
     main_page.catalog() #Переходим в каталог
@@ -51,4 +45,4 @@ def test_perehod_catalog():
     base.get_screenshot()
     
     time.sleep(5)
-    driver.quit()
+    

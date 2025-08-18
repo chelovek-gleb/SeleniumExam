@@ -7,11 +7,6 @@ from base.base_class import Base
 
 class CartPage(Base):
 
-    
-    def __init__(self, driver):
-        super().__init__(driver)
-        self.driver = driver
-
     # Locators
     """Локаторы финальной цены и наименования"""
     final_price_locator = "//div[contains(@class, 'basket__sidebarLine--total')]//div[contains(@class, 'Value')]"
