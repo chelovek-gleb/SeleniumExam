@@ -18,7 +18,7 @@ def test_perehod_catalog(browser):
     products_page = ProductsPage(browser)
     cart_page = CartPage(browser)
     base = Base(browser)
-    print(f'Размер окна браузера: {browser.get_window_size()}')
+    print(f'Размер окна браузера: {browser.get_window_size()}') # принт
 
 
     main_page.catalog() #Переходим в каталог
