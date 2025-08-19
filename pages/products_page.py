@@ -20,7 +20,7 @@ class ProductsPage(Base):
 
     product1_locator = '(//div[@data-index="0"])[1]' #локатор для первого продукта в списке 
     add_to_cart_product1_locator = '(//span[text()="Добавить в корзину"])[1]' #кнопка добавить в корзину у продукта 1
-    add_to_cart_choose_size_locator = '(//span[text()="Добавить в корзину"])[25]' #локатор корзины в самой модалке
+    add_to_cart_choose_size_locator = '(//span[text()="Добавить в корзину"])[24]' #локатор корзины в самой модалке
     go_to_cart_locator = '(//div[text()="В корзине"])[2]' #локатор для перехода в корзину из модалки
 
     discount_price_product1_locator = "(//div[@data-index='0'])[1]//span[contains(@class, 'ProductCard_price--discount')]" #Локатор для скидочной цены товара
