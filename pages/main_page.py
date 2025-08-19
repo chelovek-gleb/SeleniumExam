@@ -74,10 +74,12 @@ class MainPage(Base):
         Logger.add_start_step(method = 'catalog')
         self.driver.get(self.url)
         try:
+            self.get_screenshot()
             self.click_catalog()
             print('Каталог открыт напрямую')
         except TimeoutException:
-            print('Каталог не найден напрямую, пробуем через бургер-меню')
+            print('Каталог не найден напрямую, пробуем через бургер-меню. Делаем скрин')
+            self.get_screenshot()
             self.click_burger_menu()
             self.click_catalog()
             print("Каталог открыт через бургер-меню")

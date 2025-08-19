@@ -1,4 +1,5 @@
 import datetime
+import os
 
 """Общие методы для всех страниц"""
 
@@ -22,8 +23,13 @@ class Base():
     def get_screenshot(self):
         now_date = datetime.datetime.utcnow().strftime("%Y.%m.%d.%H.%M.%S")
         name_screenshot = f'screenshot{now_date}.png'
-        self.driver.save_screenshot(f'D:\\Python\\MySeleniumProjectOOPexam\\screenshots\\{name_screenshot}')
-        print('Скриншот выполнен')
+        # папка для скринов в корне проекта
+        screenshots_dir = os.path.join(os.getcwd(), "screenshots")
+        os.makedirs(screenshots_dir, exist_ok=True)
+        
+        path = os.path.join(screenshots_dir, name_screenshot)
+        self.driver.save_screenshot(path)
+        print(f'Скриншот выполнен: {path}')
 
     """Проверка урла"""
     def assert_url(self, result):

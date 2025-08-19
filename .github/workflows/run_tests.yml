@@ -40,3 +40,10 @@ jobs:
       - name: Run all tests
         if: github.event.inputs.deployment_target == 'run_all_tests'
         run: xvfb-run -s "-screen 0 2560x1440x24" pytest -s -v
+
+      - name: Upload screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots
