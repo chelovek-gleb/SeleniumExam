@@ -26,25 +26,25 @@ class FilterPage(Base):
 
      # Getters
 
-    def get_filter_price_from(self):
+    def get_filter_price_from(self): # фильтр цена ОТ
         return WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.filter_price_from_locator)))
     
-    def get_filter_price_to(self):
+    def get_filter_price_to(self): # фильтр цена ДО
         return WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.filter_price_to_locator)))
     
-    def get_filter_tourist(self):
+    def get_filter_tourist(self): # фильтр туристические палатки
         return WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.filter_tourist_locator)))
     
-    def get_apply_button(self):
+    def get_apply_button(self): # кнопка подтвердить фильтры
         return WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.apply_button_locator)))
     
-    def get_apply_button_cookies(self):
+    def get_apply_button_cookies(self): #подтвердить куки
         return WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.apply_button_cookies_locator)))
     
-    def get_raiting(self):
+    def get_raiting(self): #локатор нужен для того чтобы к нему навестись и нажать кнопку применить
         return WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.raiting_locator)))
     
-    def get_kol_vo(self):
+    def get_kol_vo(self): #локатор нужен для того чтобы к нему навестись и не перекрывать нужный чекбокс
         return WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, self.kol_vo_locator)))
     
     # Actions
